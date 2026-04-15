@@ -65,4 +65,19 @@ public class OrderController {
             @RequestBody String status) {
         return ResponseEntity.ok(orderService.updateOrderStatus(id, status));
     }
+
+    @PostMapping("/{id}/cancel")
+    public ResponseEntity<OrderDTO> cancelOrder(@PathVariable Long id) {
+        return ResponseEntity.ok(orderService.cancelOrder(id));
+    }
+
+    @PostMapping("/batch")
+    public ResponseEntity<List<OrderDTO>> createBatchOrders(@Valid @RequestBody List<CreateOrderRequest> requests) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(orderService.createBatchOrders(requests));
+    }
+
+    @GetMapping("/export")
+    public List<OrderDTO> exportAllOrders() {
+        return orderService.exportAllOrders();
+    }
 }

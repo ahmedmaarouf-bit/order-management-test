@@ -14,6 +14,9 @@ import java.util.List;
 @Builder
 public class CreateOrderRequest {
 
+    @NotNull(message = "Idempotency key is required")
+    private String idempotencyKey;
+
     @NotNull(message = "Customer ID is required")
     private Long customerId;
 
